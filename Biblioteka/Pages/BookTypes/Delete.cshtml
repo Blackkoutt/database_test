@@ -1,0 +1,28 @@
+﻿@page
+@model Biblioteka.Pages.BookTypes.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h1>Usunięcie rodzaju: @Model.BookType.name</h1>
+    <div class="myForm">
+        <h3>Napewno chcesz usunąć ten element?</h3>
+        <dl>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.BookType.name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.BookType.name)
+            </dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="BookType.typeId" />
+            <input type="submit" value="Usuń" class="button buttonRed" /> 
+            <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+
+        </form>
+    </div>
+</div>
+

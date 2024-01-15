@@ -1,0 +1,40 @@
+﻿@page
+@model Biblioteka.Pages.Publishers.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="myContainerv2">
+    <h1>Dodawanie nowego wydawnictwa</h1>
+    <div class="myForm">
+        <hr />
+        <div class="row">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Publisher.name" class="control-label"></label>
+                    <input asp-for="Publisher.name" class="form-control" />
+                    <span asp-validation-for="Publisher.name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Publisher.description" class="control-label"></label>
+                    <input asp-for="Publisher.description" class="form-control" />
+                    <span asp-validation-for="Publisher.description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Dodaj" class="button buttonGreen" />
+                </div>
+            </form>
+        </div>
+
+        <button class="button buttonDefault">
+            <a class="lightText" asp-page="./Index">Wróć</a>
+        </button>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

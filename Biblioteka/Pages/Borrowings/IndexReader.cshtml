@@ -1,0 +1,74 @@
+﻿@page
+@model Biblioteka.Pages.Borrowings.IndexReaderModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+
+<div class="myContainerv2">
+    @{
+        if (Model.Borrowing == null || Model.Borrowing.Count == 0)
+        {
+            <h1>Wypożycz książkę tym przyciskiem:</h1>
+            if (!User.IsInRole("Employee"))
+            {
+                <div class="text-center">
+                    <button class="button buttonDefault" style="margin: 0 auto;">
+                        <a class="nav-link lightText" asp-page="../Books/Index">Zacznij Wypożyczać!</a>
+                    </button>
+                </div>
+
+                
+            }
+            <img src="~/images/noborrows.jpg" style="position:relative;width: 100%;height: auto;" />
+        }
+        else
+        {
+            <h1>Wypożyczenia</h1>
+
+    <table class="tableToModify">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
+                </th>               
+                <th>
+                    @Html.DisplayName("Wypożyczona książka")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Borrowing)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.borrowDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.plannedReturnDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.returnDate)
+                    </td>                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.book.title)
+                    </td>
+                    <td>
+                        <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.borrowId">Usuń</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        }
+    }
+    
+</div>

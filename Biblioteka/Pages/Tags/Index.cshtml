@@ -1,0 +1,51 @@
+﻿@page
+@model Biblioteka.Pages.Tags.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="myContainerv2">
+
+    <form method="get">
+        <div class="searchingsegment">
+            <div class="wrapper">
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+                <input type="text" class="input" placeholder="Wyszukaj tag" name="tagName">
+                <button type="submit" class="searchbtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+    </form>
+
+    <button class="button buttonDefault" style="float:right; margin-right:50px;">
+        <a class="nav-link text-light" asp-page="Create">Dodaj nowy tag</a>
+    </button>
+
+    <h1>Lista Tagów</h1>
+
+
+    <table class="tableToModify">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tag[0].name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Tag)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.tagId">Edytuj</a></button>
+                        <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.tagId">Usuń</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

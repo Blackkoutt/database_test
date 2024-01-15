@@ -1,0 +1,36 @@
+﻿@page
+@model Biblioteka.Pages.Publishers.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h1>Usunięcie Wydawnictwa: @Model.Publisher.name</h1>
+    <div class="myForm">
+        <h3>Napewno chcesz usunąć ten element?</h3>
+        <div>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher.name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher.name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher.description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher.description)
+                </dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Publisher.publisherId" />
+                <input type="submit" value="Usuń" class="button buttonRed" /> 
+                <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+            </form>
+        </div>
+
+    </div>
+</div>
+

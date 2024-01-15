@@ -1,0 +1,65 @@
+﻿@page
+@model Biblioteka.Pages.Employees.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <div class="myContainerv2">
+    <form method="get">
+        <div class="searchingsegment">
+            <div class="wrapper">
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+                <input type="text" class="input" placeholder="Wyszukaj pracownika" name="SearchTerm" value="@Model.SearchTerm">
+                <button type="submit" class="searchbtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+    </form>
+
+            <button class="button buttonDefault" style="float:right; margin-right:50px;">
+                <a class="nav-link lightText" asp-page="Create">Dodaj nowego pracownika</a>
+            </button>
+            <h1>Pracownicy</h1>
+
+
+            <table class="tableToModify">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].surname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].dateOfEmployment)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Employee)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dateOfEmployment)
+                            </td>
+                            <td>
+                                @if (item.employeeData == null)
+                                {
+                                    <button class="button buttonGreen"><a class="lightText" asp-page="../EmployeeExtraData/Create" asp-route-id="@item.employeeId">Dodaj dane szczegółowe</a></button>
+                                }
+                                <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.employeeId">Szczegóły</a></button>
+                                <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.employeeId">Usuń</a></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+</div>

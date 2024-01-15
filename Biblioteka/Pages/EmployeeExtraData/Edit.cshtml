@@ -1,0 +1,65 @@
+﻿@page
+@model Biblioteka.Pages.EmployeeExtraData.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="myContainerv2">
+    <h1>Edytuj szczegółowe dane pracownika</h1>
+    <div class="myForm">
+        <hr />
+        <div class="row">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="EmployeeData.employeeId" />
+                <div class="form-group">
+                    <label asp-for="EmployeeData.pesel" class="control-label"></label>
+                    <input asp-for="EmployeeData.pesel" class="form-control" />
+                    <span asp-validation-for="EmployeeData.pesel" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeData.street" class="control-label"></label>
+                    <input asp-for="EmployeeData.street" class="form-control" />
+                    <span asp-validation-for="EmployeeData.street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeData.houseNumber" class="control-label"></label>
+                    <input asp-for="EmployeeData.houseNumber" class="form-control" />
+                    <span asp-validation-for="EmployeeData.houseNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeData.town" class="control-label"></label>
+                    <input asp-for="EmployeeData.town" class="form-control" />
+                    <span asp-validation-for="EmployeeData.town" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeData.zipCode" class="control-label"></label>
+                    <input asp-for="EmployeeData.zipCode" class="form-control" />
+                    <span asp-validation-for="EmployeeData.zipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeData.phoneNumber" class="control-label"></label>
+                    <input asp-for="EmployeeData.phoneNumber" class="form-control" />
+                    <span asp-validation-for="EmployeeData.phoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeData.birthDate" class="control-label"></label>
+                    <input asp-for="EmployeeData.birthDate" class="form-control" />
+                    <span asp-validation-for="EmployeeData.birthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="button buttonGreen" />
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <button class="button buttonDefault"><a class="lightText" asp-page="../Employees/Index">Wróć</a></button>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

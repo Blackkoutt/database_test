@@ -1,0 +1,61 @@
+﻿@page
+@model Biblioteka.Pages.Authors.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="myContainerv2">
+    <h1>Edytuj dane autora</h1>
+    <div class="myForm">
+        <hr />
+        <div class="row">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Author.authorId" />
+                <div class="form-group">
+                    <label asp-for="Author.name" class="control-label"></label>
+                    <input asp-for="Author.name" class="form-control" />
+                    <span asp-validation-for="Author.name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author.surname" class="control-label"></label>
+                    <input asp-for="Author.surname" class="form-control" />
+                    <span asp-validation-for="Author.surname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author.birthDate" class="control-label"></label>
+                    <input asp-for="Author.birthDate" class="form-control" />
+                    <span asp-validation-for="Author.birthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author.country" class="control-label"></label>
+                    <input asp-for="Author.country" class="form-control" />
+                    <span asp-validation-for="Author.country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author.nickname" class="control-label"></label>
+                    <input asp-for="Author.nickname" class="form-control" />
+                    <span asp-validation-for="Author.nickname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author.description" class="control-label"></label>
+                    <input asp-for="Author.description" class="form-control" />
+                    <span asp-validation-for="Author.description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="button buttonGreen" />
+                </div>
+            </form>
+        </div>
+
+        <button class="button buttonDefault">
+            <a class="lightText" asp-page="./Index">Wróć</a>
+        </button>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

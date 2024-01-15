@@ -1,0 +1,87 @@
+﻿@page
+@model Biblioteka.Pages.Borrowings.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+@using Microsoft.AspNetCore.Identity
+
+<div class="myContainerv2">
+    <h1>Wypożyczenie książki: <b>@Model.Book.title</b></h1>
+    <div class="myForm">
+        <h4>Uzupełnij dane żeby wypożyczyć książkę</h4>
+        <hr />
+        <div class="row">
+            <form method="post" onsubmit="return validateDate()">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Borrowing.borrowDate" class="control-label"></label>
+                    <input asp-for="Borrowing.borrowDate" class="form-control" id="borrowDate" />
+                    <span asp-validation-for="Borrowing.borrowDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @* <input type="button" value="Dodaj do listy wypożyczeń" class="button buttonGreen" onclick="addToBasket('@Model.Book.bookId', document.getElementById('borrowDate').value)" />
+                    <input type="submit" value="Dodaj i przejdź do finalizacji" class="button buttonLightGreen" asp-page-handler="redirectToBasket" /> *@
+
+                    <input type="button" value="Dodaj do listy wypożyczeń" class="button buttonGreen" onclick="addToBasket('@Model.Book.bookId', document.getElementById('borrowDate').value)" />
+                    <button type="button" id="redirectToBasketButton" class="button buttonLightGreen" onclick="addAndRedirect('@Model.Book.bookId', document.getElementById('borrowDate').value)">Dodaj i przejdź do finalizacji</button>
+                   
+                </div>
+            </form>
+        </div>
+
+        <button class="button buttonDefault">
+            <a class="lightText" asp-page="../Books/Index">Wróć</a>
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        var basket = JSON.parse(sessionStorage.getItem('basket')) || [];
+
+        function addToBasket(bookId, borrowDate) {
+            if (!validateDate()) {
+                return;
+            }
+
+            if (basket.some(item => item.bookId === bookId)) {
+                alert('Książka już jest w koszyku.');
+                return;
+            }
+
+            if (basket.length >= 5) {
+                alert('Koszyk jest pełny. Możesz dodać maksymalnie 5 książek.');
+                return;
+            }
+
+            basket.push({ book: {bookId: bookId} , borrowDate: borrowDate });
+            alert('Książka dodana do koszyka.');
+            console.log(basket);
+
+            // zapisz do session storage
+            sessionStorage.setItem('basket', JSON.stringify(basket));
+            console.log(sessionStorage.getItem('basket'));
+        }
+
+        function validateDate() {
+            var today = new Date();
+            var selectedDate = new Date(document.getElementById('borrowDate').value);
+            if (selectedDate < today) {
+                alert("Data wypożyczenia nie może być wcześniejsza niż dzisiejsza data.");
+                return false;
+            }
+            return true;
+        }
+
+        function addAndRedirect(bookId, borrowDate) {
+            addToBasket(bookId, borrowDate);
+            window.location.href = '/Basket/Index';
+        }
+    </script>
+}

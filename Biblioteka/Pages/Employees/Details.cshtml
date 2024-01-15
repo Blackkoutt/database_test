@@ -1,0 +1,63 @@
+﻿@page
+@model Biblioteka.Pages.Employees.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="myContainerv2">
+    <h1>Informacje o pracowniku</h1>
+
+    <div class="myForm">
+        <h1>Dane ogólne</h1>
+        <hr />
+        <dl>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.surname)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.surname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.dateOfEmployment)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.dateOfEmployment)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.position.name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.position.name)
+            </dd>
+        </dl>
+        <partial name="~/Pages/EmployeeExtraData/_DetailsPartial.cshtml" model="Model" />
+        <div>
+            <button class="button buttonYellow">
+                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Employee?.employeeId">Edytuj dane ogólne</a>
+            </button>
+            @if (Model.EmployeeData == null)
+            {
+                <button class="button buttonGreen">
+                    <a class="lightText" asp-page="../EmployeeExtraData/Create" asp-route-id="@Model.Employee?.employeeId">Dodaj dane szczegółowe</a>
+                </button>
+            }
+            else
+            {
+                <button class="button buttonYellow">
+                    <a class="lightText" asp-page="../EmployeeExtraData/Edit" asp-route-id="@Model.EmployeeData?.employeeId">Edytuj dane szczegółowe</a>
+                </button>
+            }
+            <button class="button buttonDefault">
+                <a class="lightText" asp-page="./Index">Wróć do listy pracowników</a>
+            </button>
+        </div>
+    </div>
+
+</div>

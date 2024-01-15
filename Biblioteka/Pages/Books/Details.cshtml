@@ -1,0 +1,201 @@
+﻿@page
+@using Microsoft.EntityFrameworkCore.Metadata.Internal;
+@model Biblioteka.Views.Books.DetailsModel
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+@{
+    ViewData["Title"] = "Details";
+}
+<article id="main_article">
+    <div class="main_book_details">
+        <h1>Informacje o książce pt: @Model.Book.title</h1>
+        <div class="book_details">
+            <div class="left_details_div">
+                <h5>Informacje podstawowe:</h5>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.title):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.title)</p>
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayName("Autorzy"):</p>
+                    <p class="data">
+                        @foreach (var authors in Model.Book.authors)
+                        {
+                            <span>@authors.author.name @authors.author.surname</span>
+                        }
+                    </p>
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.ISBN):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.ISBN)</p>
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.description):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.description)</p>
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.availableCopys):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.availableCopys)</p>
+                </div>
+
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.releaseDate):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.releaseDate)</p>
+                </div>
+            </div>
+            <div class="right_details_div">
+                <h5>Lokalizacja książki "@Model.Book.title" w bibliotece:</h5>
+                <div>
+                    @if (Model.Book.availableCopys == 0)
+                    {
+                        <span>(Obecnie nie ma książki w bibliotece, to będzie jej lokalizacja, jeżeli znowu będzie dostępna) </span>
+                    }
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.floor):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.floor)</p>
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.alley):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.alley)</p>
+                </div>
+                <div class="book_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.Book.rowNumber):</p>
+                    <p class="data">@Html.DisplayFor(model => model.Book.rowNumber)</p>
+                </div>
+            </div>
+        </div>
+        <div class="details_buttons"> 
+            <button class="button  buttonGreen">
+                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Book?.bookId">Edytuj</a>
+            </button>
+            <button class="button buttonDefault">
+                <a class="lightText" asp-page="./Index">Wróć</a>
+            </button>
+        </div>
+    </div>
+    <div class="opinions">
+        @{
+            if (!Model.IsRatingAdded)
+            {
+                <h3> Wystaw opinię na temat książki "@Model.Book.title":</h3>
+                <form method="post">
+                    <div class="your_opinion_column">
+                        <div class="your_opinion">
+                            <div class="stars">
+                                <div class="avg_opinion">
+                                    <h5>Średnia ocena:</h5>
+                                    @{
+                                        if (Model.Book.ratingAVG == null)
+                                        {
+                                            <p class="book_rating_avg">Brak ocen</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="book_rating_avg">@Model.Book.ratingAVG</p>
+                                        }
+                                    }
+                                </div>
+                                <h5>Twoja ocena:</h5>
+                                <div class="stars_div">
+                                    <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                    <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                    <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                    <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                    <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                </div>
+                                <input type="hidden" asp-for="Book.bookId" />
+                                <input asp-for="User_Opinion.rating" class="form-control your_rating d-none" />
+                                <span asp-validation-for="User_Opinion.rating" class="text-danger"></span>
+                            </div>
+                            <div class="your_comment">
+                                <div>
+                                    <label asp-for="User_Opinion.opinion" class="control-label"></label>
+                                </div>
+                                <textarea asp-for="User_Opinion.opinion" class="opinion_input form-control" placeholder="Opinia powinna zawierać nie więcej niż 500 znaków"></textarea>
+                                <span asp-validation-for="User_Opinion.opinion" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <input type="submit" value="Dodaj" class="button buttonGreen lightText" />
+                        </div>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="opinion_is_added">
+                    <div class="avg_opinion">
+                        <h4>Średnia ocena:</h4>
+                        @{
+                            if (Model.Book.ratingAVG == null)
+                            {
+                                <p class="book_rating_avg">Brak ocen</p>
+                            }
+                            else
+                            {
+                                <p class="book_rating_avg">@Model.Book.ratingAVG</p>
+                            }
+                        }
+                    </div>
+                    @if(User.IsInRole("Reader")&&!User.IsInRole("Employee")){
+                        <h4>Dodałeś już opinię na temat tej książki!</h4>
+                    }            
+                </div>
+            }
+        }           
+        <div class="other_comments">
+            <h4> Pozostałe opinie:</h4>
+            @{
+                if (!Model.Opinions.Any())
+                {
+                    <div class="empty_opinions">
+                        <div>
+                            <img src="~/images/opinion.jpg" />
+                        </div>
+                        <div>
+                            <p>Obecnie brak opinii na temat tej książki. Bądź pierwszy i podziel się swoją opinią teraz!</p>
+                        </div>
+                        
+                    </div>
+                }
+                else
+                {
+                    foreach(var opinion in Model.Opinions)
+                    {
+                        <div class="comment">
+                            <div class="comment_user">
+                                <img src="~/images/user_photo.jpg" />
+                                <div>
+                                    <p>@opinion.reader.FullName</p>
+                                    @{
+
+                                         <p>Data dodania:  @opinion.addedDate.Value.ToString("dd/MM/yyyy")</p>
+                                        
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                
+                            </div>
+                            <div>
+                                <span class="fa fa-star fa-2x opinion_star"></span>
+                                <span class="fa fa-star fa-2x opinion_star"></span>
+                                <span class="fa fa-star fa-2x opinion_star"></span>
+                                <span class="fa fa-star fa-2x opinion_star"></span>
+                                <span class="fa fa-star fa-2x opinion_star"></span>
+                                <p class="user_rating d-none">@opinion.rating</p>
+                            </div>
+                            <div class="user_opinion">
+                                <p>@opinion.opinion</p>
+                            </div>           
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</article>
+<script src="~/js/opinions.js"></script>
+
+

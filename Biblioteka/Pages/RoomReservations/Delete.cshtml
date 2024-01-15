@@ -1,0 +1,39 @@
+﻿@page
+@model Biblioteka.Pages.RoomReservations.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h1>Anulowanie rezerwacji Sali</h1>
+    <div class="myForm">
+        <h4>Dane rezerwacji:</h4>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.RoomReservation.begginingOfReservationDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RoomReservation.begginingOfReservationDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.RoomReservation.endOfReservationDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RoomReservation.endOfReservationDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.RoomReservation.room)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RoomReservation.room.FullData)
+            </dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="RoomReservation.reservationId" />
+            <input type="submit" value="Anuluj rezerwację" class="button buttonRed" /> 
+            <button class="button buttonDefault"><a class="lightText" asp-page="./IndexEmployees">Wróć</a></button>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Biblioteka.Areas.Identity.Data
+
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+
+    @{
+        if (SignInManager.IsSignedIn(User))
+        {
+            <div class="menu_panel">
+                <button class="button_menu">
+                <i class="fa-solid fa-user icon_user"></i> <p>Witaj, @UserManager.GetUserName(User)!</p>
+                </button>
+            </div>
+            <div class="menu_content">
+                <div>
+                    <div class="menu_option">
+                        <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                            <i class="fa-regular fa-user"></i> Panel konta
+                        </a>                      
+                    </div>
+                    <div class="menu_option is_displayed_option">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Books/Index">
+                        <i class="fa-solid fa-book-open"></i> Księgozbiór
+                        </a>
+                    </div>
+                    
+                    @if (User.IsInRole("Admin")||User.IsInRole("Employee"))
+                    {
+                        
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/RoomReservations/IndexAdmin">
+                            <i class="fa-solid fa-bookmark"></i>Wynajem sal
+                            </a>
+                        </div>
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Borrowings/IndexEmployees">
+                            <i class="fa-solid fa-address-book"></i> Wypożyczenia
+                            </a>
+                        </div>
+                        <div class="menu_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Manage/Management">
+                                <i class="fa-solid fa-book"></i>
+                                Zarządzaj biblioteką
+                            </a>
+                        </div>
+                    }
+                    @if (!User.IsInRole("Employee")&&User.IsInRole("Reader"))
+                    {
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/RoomReservations/IndexReader">
+                            <i class="fa-solid fa-bookmark"></i> Wynajem sal
+                            </a>
+                        </div>
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Borrowings/IndexReader">
+                            <i class="fa-solid fa-address-book"></i> Wypożyczenia
+                            </a>
+                        </div>
+                        <div class="menu_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Basket/Index">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                Koszyk
+                            </a>
+                        </div>
+
+                    }
+                    <div class="menu_option-last">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                            <button id="logout" type="submit" class="logout_button text-white">
+                            <i class="fa-solid fa-right-from-bracket"></i>Wyloguj
+                            </button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="reg_log_btns">
+                <div class="register_button">
+                    <a class="nav-link" style="color:#fff;" id="register" asp-area="Identity" asp-page="/Account/ReaderRegister">Rejestracja</a>
+                </div>
+                <div class="login_button">
+                    <a class="nav-link" style="color:#fff;" id="login" asp-area="Identity" asp-page="/Account/Login">Logowanie</a>
+                </div>
+            </div>
+        }
+    }

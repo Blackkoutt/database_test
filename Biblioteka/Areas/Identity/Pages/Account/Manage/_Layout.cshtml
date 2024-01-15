@@ -1,0 +1,31 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<div class="myContainerv2">
+    <div class="profile">
+        <div class="left_profile_div">
+            <div class="profile_photo">
+                <img src="~/images/user_photo.jpg"/>
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <div class="profile_options">
+                <partial name="_ManageNav" />
+            </div>
+        </div>   
+        <div class="main_profile_details">
+              @RenderBody()
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

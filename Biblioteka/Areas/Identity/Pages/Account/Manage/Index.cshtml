@@ -1,0 +1,160 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+<div class="profile_details">
+
+<h3>Dane osobowe</h3>
+@if (User.IsInRole("Employee"))
+{
+    <div class="view_change">
+        <p class="overall_details border_add">Dane ogólne</p>
+        <p class="detailed_details">Dane szczegółowe</p>
+    </div>
+}
+<hr />
+@{
+    if (User.IsInRole("Reader") && !User.IsInRole("Employee"))
+    {
+        <div class="profile_data">
+            <p class="label_data">@Html.DisplayNameFor(model => model.reader.name):</p>
+            <p class="data">@Html.DisplayFor(modelItem =>  Model.reader.name)</p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">@Html.DisplayNameFor(model => model.reader.surname):</p>
+            <p class="data">@Html.DisplayFor(modelItem =>  Model.reader.surname)</p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">@Html.DisplayNameFor(model => model.reader.email):</p>
+            <p class="data">@Model.reader.email</p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">@Html.DisplayNameFor(model => model.reader.birthDate):</p>
+            <p class="data">
+                @{
+                    string formattedDate = null;
+                    if (Model.reader.birthDate.HasValue)
+                    {
+                        formattedDate = Model.reader.birthDate.Value.ToString("dd/MM/yyyy");
+                    }
+                }
+
+                @Html.DisplayFor(modelItem => formattedDate)
+            </p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">Rola:</p>
+            <p class="data">Czytelnik</p>
+        </div>
+    }
+    else if (User.IsInRole("Employee"))
+    {
+        <div class="employee_overall_data">
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.name):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.name)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.surname):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.surname)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.email):</p>
+                <p class="data">@Model.employee.email</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.dateOfEmployment):</p>
+                <p class="data">
+                    @{
+
+                        var formattedDate = Model.employee.dateOfEmployment.ToString("dd/MM/yyyy");
+                    }
+
+                    @Html.DisplayFor(modelItem => formattedDate)
+                </p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.position.name):</p>
+                @{
+                    var postion_name = "";
+                    if (Model.employee.position == null)
+                    {
+                        postion_name = "Brak";
+                    }
+                    else
+                    {
+                        postion_name = Model.employee.position.name;
+                    }
+                }
+                <p class="data">@Html.DisplayFor(modelItem =>  postion_name)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">Rola:</p>
+                <p class="data">Pracownik</p>
+            </div>
+        </div>
+        <div class="employee_detailed_data data_hidden">
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.employeeData.pesel):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.employeeData.pesel)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.employeeData.street):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.employeeData.street)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.employeeData.houseNumber):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.employeeData.houseNumber)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.employeeData.zipCode):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.employeeData.zipCode)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.employeeData.phoneNumber):</p>
+                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.employeeData.phoneNumber)</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.employee.employeeData.birthDate):</p>
+                <p class="data">
+                    @{
+
+                        var formattedBirthDate = Model.employee.employeeData.birthDate.ToString("dd/MM/yyyy");
+                    }
+
+                    @Html.DisplayFor(modelItem => formattedBirthDate)
+                </p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="profile_data">
+            <p class="label_data">Imię: </p>
+            <p class="data">Admin</p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">Nazwisko: </p>
+            <p class="data">Admin</p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">Email: </p>
+            <p class="data">@Model.Username</p>
+        </div>
+        <div class="profile_data">
+            <p class="label_data">Rola:</p>
+            <p class="data">Administrator</p>
+        </div>
+    }
+}
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

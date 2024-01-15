@@ -1,0 +1,78 @@
+﻿@page
+@model Biblioteka.Pages.Basket.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+
+<div class="myContainerv2">
+    @{
+        <div class="container">
+            <h2>Twoj koszyk</h2>
+            <div id="basketItems"></div>
+            <button class="button buttonGreen" onclick="finalizeBasket()">Finalize Borrowing</button>
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+    <script>
+        function displayBasket() {
+            var basket = JSON.parse(sessionStorage.getItem('basket')) || [];
+            var basketItemsContainer = document.getElementById('basketItems');
+
+            if (basket.length === 0) {
+                basketItemsContainer.innerHTML = '<p>Koszyk jest pusty</p>';
+                return;
+            }
+
+            var itemsHtml = basket.map(function (item) {
+                return '<div class="basket-item">' +
+                    '<p>Id ksiazki: ' + item.book.bookId + '</p>' +
+                    '<p>Data wypozyczenia: ' + item.borrowDate + '</p>' +
+                    '</div>';
+            }).join('');
+
+            basketItemsContainer.innerHTML = itemsHtml;
+
+            console.log(basket);
+            console.log(sessionStorage);
+        }
+
+        function finalizeBasket() {
+            var b = sessionStorage.getItem('basket');
+            console.log(b);
+            var basket = JSON.parse(sessionStorage.getItem('basket')) || [];
+            console.log(basket);
+            var bookIds = basket.map(item => item.bookId).join(', ');
+            //alert(basket.bookIds);
+            console.log(bookIds);
+
+            if (basket.length === 0) {
+                alert("Koszyk jest pusty");
+                return;
+            }
+
+            fetch('/Basket/Create?handler=Finalize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                },
+                body: JSON.stringify(basket)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Wypozyczenia zostaly zrealizowane");
+                    } else {
+                        alert("Przynajmniej jedno wypozyczenie nie zostalo zrealizowane. Limit wypozyczen wynosi 5. Sprawdz aktualne wypozycznia w zakladce wypozyczen");
+                    }
+                });
+                sessionStorage.clear();
+        }
+        displayBasket();
+    </script>
+}

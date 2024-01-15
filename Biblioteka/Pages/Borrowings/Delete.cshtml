@@ -1,0 +1,45 @@
+﻿@page
+@model Biblioteka.Pages.Borrowings.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h1>Usunięcie wypożyczenia</h1>
+    <div class="myForm">
+        <h3>Czy na pewno chcesz usunąć wypożyczenie książki: <b style="color:yellow;">@Model.Book.title</b>?</h3>
+        <div>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Borrowing.borrowDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Borrowing.borrowDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Borrowing.plannedReturnDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Borrowing.plannedReturnDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Borrowing.returnDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Borrowing.returnDate)
+                </dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Borrowing.borrowId" />
+                <input type="submit" value="Usuń" class="button buttonRed" />
+                <button class="button buttonDefault">
+                    <a class="lightText" asp-page="./IndexReader">Wróć</a>
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+﻿@page
+@model Biblioteka.Pages.Tags.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="myContainerv2">
+    <h1>Utwórz nowy tag</h1>
+    <div class="myForm">
+        <hr />
+        <div class="row">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Tag.name" class="control-label"></label>
+                    <input asp-for="Tag.name" class="form-control" />
+                    <span asp-validation-for="Tag.name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Stwórz" class="button buttonGreen lightText" />
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

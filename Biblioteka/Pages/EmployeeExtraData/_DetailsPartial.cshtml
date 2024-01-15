@@ -1,0 +1,53 @@
+﻿@page
+@model Biblioteka.Pages.Employees.DetailsModel
+
+    <div>
+        <h1>Dane szczegółowe</h1>
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.pesel)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.pesel)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.street)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.street)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.houseNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.houseNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.town)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.town)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.zipCode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.zipCode)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.phoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.phoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmployeeData.birthDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmployeeData.birthDate)
+            </dd>
+        </dl>
+    </div>
+
+

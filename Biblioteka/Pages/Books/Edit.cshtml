@@ -1,0 +1,88 @@
+﻿@page
+@model Biblioteka.Views.Books.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="myContainerv2">
+    <h1>Edytuj książkę pt: <b>@Model.Book.title</b></h1>
+    <div class="myForm">
+        <hr />
+        <div class="row">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Book.bookId" />
+                <div class="form-group">
+                    <label asp-for="Book.title" class="control-label"></label>
+                    <input asp-for="Book.title" class="form-control" />
+                    <span asp-validation-for="Book.title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.ISBN" class="control-label"></label>
+                    <input asp-for="Book.ISBN" class="form-control" />
+                    <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.description" class="control-label"></label>
+                    <input asp-for="Book.description" class="form-control" />
+                    <span asp-validation-for="Book.description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.availableCopys" class="control-label"></label>
+                    <input asp-for="Book.availableCopys" class="form-control" />
+                    <span asp-validation-for="Book.availableCopys" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.releaseDate" class="control-label"></label>
+                    <input asp-for="Book.releaseDate" class="form-control" />
+                    <span asp-validation-for="Book.releaseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.genre" class="control-label"></label>
+                    <select asp-for="@Model.GenreId" class="form-control" asp-items="Model.Genre"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.type" class="control-label"></label>
+                    <select asp-for="@Model.BookTypeId" class="form-control" asp-items="Model.Type"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.publisher" class="control-label"></label>
+                    <select asp-for="@Model.PublisherId" class="form-control" asp-items="Model.Publisher"></select>
+                </div>
+                <hr />
+                <dd>
+                <span>Lokalizacja książki w bibliotece:</span>
+                </dd>
+                <div class="form-group">
+                    <label asp-for="Book.floor" class="control-label"></label>
+                    <input asp-for="Book.floor" class="form-control" />
+                    <span asp-validation-for="Book.floor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.alley" class="control-label"></label>
+                    <input asp-for="Book.alley" class="form-control" />
+                    <span asp-validation-for="Book.alley" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.rowNumber" class="control-label"></label>
+                    <input asp-for="Book.rowNumber" class="form-control" />
+                    <span asp-validation-for="Book.rowNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Zapisz" class="button buttonGreen lightText" />
+                </div>
+            </form>
+        </div>
+        <button class="button buttonDefault">
+            <a class="lightText" asp-page="./Index">Wróć</a>
+        </button>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

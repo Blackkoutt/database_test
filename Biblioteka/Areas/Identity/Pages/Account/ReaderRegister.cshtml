@@ -1,0 +1,55 @@
+﻿@page
+@model ReaderRegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="myContainerv2">
+    <h1>Rejestracja</h1>
+    <div class="myForm" style="color:black;">
+        <div class="row" style="width:75%;position:relative; left:15%">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.name" class="form-control" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.name">Imię</label>
+                    <span asp-validation-for="Input.name" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.surname" class="form-control" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.surname">Nazwisko</label>
+                    <span asp-validation-for="Input.surname" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.birthDate" class="form-control" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.birthDate">Data urodzenia</label>
+                    <span asp-validation-for="Input.birthDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+               
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password">Hasło</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.ConfirmPassword">Potwierdź hasło</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button class="button buttonGreen" id="registerSubmit" type="submit" style="width:50%; left:25%;position: relative;">Zarejestruj się</button>
+            </form>
+        </div>
+    </div>
+
+   
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

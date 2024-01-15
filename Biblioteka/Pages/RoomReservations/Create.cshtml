@@ -1,0 +1,47 @@
+﻿@page
+@model Biblioteka.Pages.RoomReservations.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="myContainerv2">
+    <h1>Zarezerwuj salę</h1>
+    <div class="myForm">
+        <hr />
+        <div class="row">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RoomReservation.begginingOfReservationDate" class="control-label"></label>
+                    <input asp-for="RoomReservation.begginingOfReservationDate" class="form-control" />
+                    <span asp-validation-for="RoomReservation.begginingOfReservationDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomReservation.endOfReservationDate" class="control-label"></label>
+                    <input asp-for="RoomReservation.endOfReservationDate" class="form-control" />
+                    <span asp-validation-for="RoomReservation.endOfReservationDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomReservation.room" class="control-label"></label>
+                    <select asp-for="@Model.RoomId" class="form-control" asp-items="Model.Rooms"></select>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Zarezerwuj" class="button buttonGreen" />
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <button class="button buttonDefault"><a class="lightText" asp-page="Index">Wróć</a></button>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

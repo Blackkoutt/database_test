@@ -1,0 +1,77 @@
+﻿@page
+@model Biblioteka.Pages.Manage.ManagementModel
+@{
+}
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+<article id="main_article" class="content_margin">   
+    <div class="management_options">
+        <div class="management_info">
+            <h2>Zarządzanie biblioteką</h2>
+            <p>W tym miejscu znajdziesz wszytskie opcje dotyczące zarządzania biblioteką</p>
+        </div>
+        <a asp-area="" asp-page="/Authors/Index">
+            <div class="management_option">
+                <div class="option_icon">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div class="option_text">
+                    PISARZE
+                </div>          
+            </div>
+        </a>
+        <a asp-area="" asp-page="/Publishers/Index">
+            <div class="management_option">
+                <div class="option_icon">
+                    <i class="fa-solid fa-user-secret"></i>
+                </div>
+                <div class="option_text">
+                    WYDAWCY
+                </div>
+            </div>
+        </a>
+        <a asp-area="" asp-page="/BookTypes/Index">
+            <div class="management_option">
+                <div class="option_icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <div class="option_text">
+                    RODZAJE
+                </div>       
+            </div>
+        </a>
+        <a asp-area="" asp-page="/Tags/Index">
+            <div class="management_option">
+                <div class="option_icon">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <div class="option_text">
+                    TAGI
+                </div>
+            </div>
+        </a>
+        <a asp-area="" asp-page="/Genres/Index">
+            <div class="management_option">
+                <div class="option_icon">
+                    <i class="fa-solid fa-book-journal-whills"></i>
+                </div>
+                <div class="option_text">
+                    GATUNKI
+                </div>
+            </div>
+        </a>  
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-area="" asp-page="/Employees/Index">
+                <div class="management_option">
+                    <div class="option_icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="option_text">
+                        PRACOWNICY
+                    </div>
+                </div>
+            </a>        
+        }
+    </div>
+</article>

@@ -1,0 +1,57 @@
+﻿@page
+@model Biblioteka.Pages.Authors.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h3>Czy na pewno chcesz usunąć tego autora?</h3>
+    <div class="myForm">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.surname)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.surname)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.birthDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.birthDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.country)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.country)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.nickname)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.nickname)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.description)
+            </dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="Author.authorId" />
+            <input type="submit" value="Usuń" class="button buttonRed" /> 
+            <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+        </form>
+    </div>
+</div>
+
+

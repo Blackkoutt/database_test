@@ -1,0 +1,60 @@
+﻿@page
+@model Biblioteka.Pages.Authors.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="myContainerv2">
+    <h1>Dane autora</h1>
+
+    <div class="myForm">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.name)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Author.name)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.Author.surname)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Author.surname)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.Author.birthDate)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Author.birthDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.country)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Author.country)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.Author.nickname)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Author.nickname)
+            </dd>
+            <dt >
+                @Html.DisplayNameFor(model => model.Author.description)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Author.description)
+            </dd>
+        </dl>
+
+        <div>
+            <button class="button  buttonGreen">
+                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Author.authorId">Edytuj</a>
+            </button>
+            <button class="button buttonDefault">
+                <a class="lightText" asp-page="./Index">Wróć</a>
+            </button>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,249 @@
+﻿@page
+@model Biblioteka.Pages.IndexModel
+@{
+    ViewData["Title"] = "Room List";
+}
+
+<article id="main_article">
+    <section id="info">
+        <div class="welcome">
+            <h2>Witaj w bibliotece "Books - Here and Now!"</h2>
+            <p>
+                Odkryj klimatyczny i fascynujący świat literatury!
+                Nasza kolekcja książek otwiera przed Tobą drzwi do niezliczonych ciekawych historii,
+                które z pewnością umilą ci wolny czas. Posiadamy w ofercie wiele gatunków książek,
+                więc z pewnością znajdziesz coś dla siebie. Nie czekaj wypożycz już teraz !
+            </p>
+            <a asp-area="" asp-page="/Books/Index"><input type="button" value="Wypożycz książki" /></a>
+        </div>
+    </section>
+    <section id="slider">
+        <div class="list">
+            <div class="item">
+                <img id="slide1" src="~/images/slide1.jpg"/>
+            </div>
+            <div class="item">
+                <img id="slide2" src="~/images/slide2.jpg" />
+            </div>
+            <div class="item">
+                <img id="slide3" src="~/images/slide3.jpg" />
+            </div>
+            <div class="item">
+                <img src="~/images/slide1.jpg" />
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+        <ul class="dots">
+            <li class="dot_active"></li>
+            <li></li>
+            <li></li> 
+        </ul>
+    </section>
+    <section id="news_section">
+        <div class="header_info">
+            <h3>Aktualności</h3>
+            <hr style="color:#a80202;" />
+        </div>
+        <div class="main_news right_slide">
+            <img src="~/images/owl.jpg" />
+            <div class="main_news_content">
+                <h4>
+                    Konkurs na czytelnika roku 2023
+                </h4>
+                <p>
+                    Już po raz kolejny mamy zaszczyt ogłosić Konkurs na Czytelnika Roku 2023!
+                    To wyjątkowe wydarzenie, które świętuje pasję do czytania i nagradza tych,
+                    którzy potrafią zanurzyć się w świat literatury.
+                    Konkurs skierowany jest do wszystkich miłośników książek, niezależnie od wieku czy preferencji literackich.
+                    Czytasz powieści, kryminały, fantastykę, czy może bardziej klasyczne dzieła? Bez względu na to,
+                    jakie są Twoje ulubione gatunki, liczy się samo uwielbienie literatury.
+                </p>
+                <button>Czytaj dalej</button>
+            </div>
+        </div>
+        <div class="other_news">
+            <div class="news inspirations left_slide">
+                <img src="~/images/book_inspiration.jpg" />
+                <div class="news_content">
+                    <h4>
+                        Znajdź nowe inspiracje!
+                    </h4>
+                    <p>
+                        Książki są nie tylko pełne fascynujących historii,
+                        ale także ukrywają w sobie bogactwo inspirujących wzorców,
+                        źródła kreatywnych pomysłów oraz głębokie refleksje nad życiem.
+                        Odkryj tajemnice, które kryją się między wierszami,
+                        przekrocz granice codzienności, podążając śladami bohaterów i bohaterek,
+                        a z pewnością poszerzysz swoje horyzonty wyobraźni i odkryjesz nowe, fascynujące obszary życia.
+                    </p>
+                    <button>Czytaj dalej</button>
+                </div>
+            </div>
+            <div class="news left_slide">
+                <img src="~/images/workshops.jpg" />
+                <div class="news_content">
+                    <h4>
+                        Warsztaty Kreatywnego Pisania Dla Młodzieży
+                    </h4>
+                    <p>
+                        Marzysz o tym, aby zanurzyć się w magiczny świat słów,
+                        stworzyć własne opowieści i odkryć potęgę wyrazu pisanego?
+                        Koniecznie dołącz do naszych Warsztatów Kreatywnego Pisania Dla Młodzieży!
+                        To niepowtarzalna okazja dla wszystkich młodych dusz,
+                        które pragną rozwijać swoje umiejętności literackie i dzielić się swoimi pomysłami z innymi pasjonatami
+                        pisania.
+                    </p>
+                    <button>Czytaj dalej</button>
+                </div>
+            </div>
+            <div class="news left_slide">
+                <img src="~/images/film.jpg" />
+                <div class="news_content">
+                    <h4>
+                        Książki na Ekranie: Ekranizacje Literackie, Które Warto Obejrzeć
+                    </h4>
+                    <p>
+                        Czy zdarzyło Ci się kiedyś przeczytać książkę i marzyć o tym,
+                        aby zobaczyć jej historię ożywioną na wielkim ekranie?
+                        Nasze spotkanie "Książki na Ekranie" to podróż przez fascynujący świat ekranizacji literackich,
+                        które wstrząsnęły widzami i zdobyły uznanie zarówno miłośników literatury, jak i kina.
+                        Zapisz się już teraz, aby nie ominać takiej okazji!
+                    </p>
+                    <button>Czytaj dalej</button>
+                </div>
+            </div>
+            <div class="news right_slide">
+                <img src="~/images/snow_book.jpg" />
+                <div class="news_content">
+                    <h4>
+                        Zimowy Maraton Czytelniczy: Wybierz Swój Ulubiony Gatunek
+                    </h4>
+                    <p>
+                        Zima to czas, kiedy z przyjemnością chowamy się pod ciepłym kocem z filiżanką gorącej herbaty
+                        i dobrą książką. Dlatego serdecznie zapraszamy Cię na nasz Zimowy Maraton Czytelniczy,
+                        podczas którego każdy znajdzie coś dla siebie! Wybierz swój ulubiony gatunek literacki
+                        i razem z nami przemierzaj światy pełne magii, przygód i tajemnic.
+                    </p>
+                    <button>Czytaj dalej</button>
+                </div>
+            </div>
+            <div class="news right_slide">
+                <img src="~/images/presents.jpg" />
+                <div class="news_content">
+                    <h4>
+                        Zimowa dostawa - sprawdź najnowsze dostępne pozycje!
+                    </h4>
+                    <p>
+                        Ho ho ho! Święta już tuż tuż, a my przynosimy ci magiczną zimową dostawę książek.
+                        Wypełnij swoje dni świątecznym ciepłem, zanurzając się w najnowszych i dotąd niedostępnych pozycjach,
+                        które przygotowaliśmy specjalnie na ten sezon.
+                        Wypożycz już teraz i pozwól,
+                        by każda strona była dla ciebie magiczną przygodą w świątecznym czasie!
+                    </p>
+                    <button>Czytaj dalej</button>
+                </div>
+            </div>
+            <div class="news right_slide">
+                <img src="~/images/globus.jpg" />
+                <div class="news_content">
+                    <h4>
+                        Literackie Podróże: Książki z Każdego Kontynentu
+                    </h4>
+                    <p>
+                        Czy kiedykolwiek marzyłeś/marzyłaś o literackiej podróży do najodleglejszych zakątków świata?
+                        Nasze spotkanie "Literackie Podróże: Książki z Każdego Kontynentu" zaprasza Cię do odkrywania
+                        różnorodności literatury z różnych regionów globu. Przenieśmy się razem w podróż przez kontynenty,
+                        smakując różne kultury i historie przez pryzmat fascynujących książek.
+                    </p>
+                    <button>Czytaj dalej</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="author_meetings">
+        <div class="header_info">
+            <h3>Spotkania z autorami</h3>
+            <hr style="color:#a80202;" />
+        </div>
+        <div class="meeting_cards">
+            <div class="meeting_card right_slide">
+                <img src="~/images/user_photo.jpg" />
+                <div class="meeting_desc">
+                    <h4>
+                        Spotkanie z autorem Janem Kowalskim
+                    </h4>
+                    <p class="meeting_date">
+                        Data spotkania: 14/12/2023
+                    </p>
+                    <p class="meeting_description">
+                        Dołącz do naszego wyjątkowego spotkania z autorem Janem Kowalskim.
+                        Poznaj fascynujące tajniki twórczego procesu oraz dowiedz się,
+                        jakie inspiracje kierują autorem w jego literackiej podróży.
+                        Będziemy mieli okazję zgłębić kulisy powstawania
+                        jego najnowszej książki oraz zadać pytania,
+                        które od dawna chodziły Ci po głowie. Nie przegap tej wyjątkowej okazji
+                        na bezpośrednią interakcję z utalentowanym pisarzem!
+                    </p>
+                </div>
+
+            </div>
+            <div class="meeting_card left_slide">
+                <img src="~/images/user_photo.jpg" />
+                <div class="meeting_desc">
+                    <h4>
+                        Spotkanie z autorem Piotrem Nowakiem
+                    </h4>
+                    <p class="meeting_date">
+                        Data spotkania: 21/12/2023
+                    </p>
+                    <p class="meeting_description">
+                        Przygotuj się na spotkanie z utalentowanym autorem,
+                        Piotrem Nowakiem. W trakcie tego wydarzenia będziemy 
+                        odkrywać kulisy jego literackiego świata oraz rozważać
+                        tematy poruszone w najnowszej powieści.
+                        To doskonała okazja, aby dowiedzieć się,
+                        co skłania autora do tworzenia oraz zadać mu pytania na temat
+                        jego wizji i inspiracji. Czekamy na Ciebie na niezapomnianym
+                        literackim spotkaniu!
+                    </p>
+                </div>
+
+            </div>
+            <div class="meeting_card right_slide">
+                <img src="~/images/user_photo.jpg" />
+                <div class="meeting_desc">
+                    <h4>
+                        Spotkanie z autorką Anną Wiśniewską
+                    </h4>
+                    <p class="meeting_date">
+                        Data spotkania: 24/01/2024
+                    </p>
+                    <p class="meeting_description">
+                        Zarezerwuj czas na wyjątkowe spotkanie
+                        z autorką Anną Wiśniewską. Podczas tego spotkania
+                        będziemy eksplorować świat literatury poprzez pryzmat
+                        jej unikalnej perspektywy. Odkryj, jakie historie kryją
+                        się za jej pisarskim piórem i jakie przesłania chce przekazać czytelnikom.
+                        To doskonała okazja na rozmowę z autorką oraz na uczestnictwo
+                        w inspirującej wymianie myśli. Dołącz do nas i zanurz się
+                        w literackim świecie Anny Wiśniewskiej!
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</article>
+<div class="socials_desc">
+    <h4>Znajdziesz nas na:</h4>
+</div>
+<div class="socials">
+    <a href="https://www.facebook.com/" target="_blank"><div class="fb"><i class="fa-brands fa-facebook-f"></i></div></a>
+    <a href="https://www.instagram.com/" target="_blank"><div class="insta"><i class="fa-brands fa-instagram"></i></div></a>
+    <a href="https://twitter.com/?lang=pl" target="_blank"><div class="x"><i class="fa-brands fa-x-twitter"></i></div></a>
+</div>
+

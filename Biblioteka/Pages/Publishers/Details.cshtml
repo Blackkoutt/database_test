@@ -1,0 +1,37 @@
+﻿@page
+@model Biblioteka.Pages.Publishers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="myContainerv2">
+    <h1>Informacje o @Model.Publisher.name</h1>
+    <div class="myForm">
+        <div>
+            <hr />
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher.name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher.name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher.description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher.description)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <button class="button buttonGreen">
+                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Publisher?.publisherId">Edytuj</a>
+            </button>
+            <button class="button buttonDefault">
+                <a class="lightText" asp-page="./Index">Wróć</a>
+            </button>
+        </div>
+
+    </div>
+</div>

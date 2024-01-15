@@ -1,0 +1,37 @@
+﻿@page
+@model Biblioteka.Pages.Employees.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h3 style="text-align:center;">Czy naprawdę chcesz usunąc konto pracownika?</h3>
+    <div class="myForm">
+        <dl>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.surname)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.surname)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Employee.dateOfEmployment)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Employee.dateOfEmployment)
+            </dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="Employee.employeeId" />
+            <input type="submit" value="Usuń" class="button buttonRed" />
+            <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+        </form>
+    </div>
+</div>

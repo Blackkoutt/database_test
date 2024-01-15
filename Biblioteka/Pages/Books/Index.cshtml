@@ -1,0 +1,143 @@
+﻿@page
+@model Biblioteka.Views.Books.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+
+<form method="get" asp-page="./Index">
+    <div class="myContainer">
+        <div class="searchingsegment">
+            <div class="wrapper">
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+                <input type="text" class="input" placeholder="Wyszukaj książkę" name="SearchTerm" value="@Model.SearchTerm">
+                <button type="submit" class="searchbtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+</form>
+    </div>
+
+
+    <div class="listofbooks">
+    @{
+        if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+        {
+            <button class="button buttonDefault addNewBookButton">
+            <a class="nav-link text-light" asp-page="Create">Dodaj nową książkę</a>
+            </button>
+        }
+    }
+    @{
+        if(Model.Book.Count() == 0)
+        {
+            <img src="~/images/nobooks.jpg" style="position:relative;width: 100%;height: auto;" />
+        }
+        else
+        {
+            <h1>Lista Dostępnych Książek <i class="fas fa-book"></i></h1>
+        
+
+        <table class="tableToModify">
+            <thead>
+                <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book.FirstOrDefault().title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book.FirstOrDefault().availableCopys)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book.FirstOrDefault().releaseDate)
+                </th>
+                <th>
+                    @Html.DisplayName("Autorzy")
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Book.FirstOrDefault().genre)
+                </th>
+                <th>
+                    @Html.DisplayName("Tagi")
+                </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Book)
+                {
+                    <tr>
+                        <td style="font-weight: bold;">
+                            @Html.DisplayFor(modelItem => item.title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.availableCopys)
+                        </td>
+                        <td>
+                            @item.releaseDate.ToString("yyyy-MM-dd")
+                        </td>
+                        <td>
+                           
+                            @foreach (var authors in item.authors.Select((value, index) => new { value, index }))
+                            {
+                                
+                                @if (authors.index < item.authors.Count - 1)
+                                {
+                                    <span>@authors.value.author.name @authors.value.author.surname, </span>
+                                }
+                                else
+                                {
+                                    <span>@authors.value.author.name @authors.value.author.surname</span>
+                                }
+                               
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.genre.name)
+                        </td>
+                        <td>
+                            @foreach (var tag in item.tags)
+                            {
+                                <span>@tag.tag.name</span>
+                            }
+                        </td>
+                        <td>
+                            @{
+                                if(User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                {
+                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.bookId">Edytuj</a></button>
+                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.bookId">Usuń</a></button>
+                                }
+                            }
+                        <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.bookId">Detale</a></button>
+                                @{
+                                    if(item.availableCopys < 1)
+                                    {
+                                        <button class="button buttonDefault"><a class="lightText">brak książek</a></button>
+                                    } else {
+                                    if(User.IsInRole("Reader") && !User.IsInRole("Employee"))
+                                {
+                            <button class="button buttonDefault"><a class="lightText" asp-page="../Borrowings/Create" asp-route-id="@item.bookId">Wypożycz</a></button>
+                                }else if(!User.IsInRole("Employee"))
+                            {
+                                <button class="button buttonDefault"><a class="lightText" asp-page="../Account/Login" asp-route-id="@item.bookId">Wypożycz</a></button>
+                            }
+                                    }
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    }
+
+        
+    </div>
+</div>
+
+    
+
+

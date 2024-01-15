@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Biblioteka</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Biblioteka.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <nav class="myNavbar fixed-top navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
+            <div class="container-fluid position-relative">
+                <div class="nav_flex_row">
+                    <div class="nav_flex_row_no_space">
+                        <div>
+                            <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/images/logo.png" width="160" height="70" alt="Logo" /></a>
+                        </div>
+                        <div class="navbar-collapse   d-sm-inline-flex justify-content-between position-relative">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link lightText is_displayed_main_menu_option" asp-area="" asp-page="/Books/Index">KSIĘGOZBIÓR</a>
+                                </li>
+
+                                @{
+                                    if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link lightText is_displayed_main_menu_option" asp-area="" asp-page="/RoomReservations/IndexEmployees">WYNAJEM SAL</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link lightText is_displayed_main_menu_option" asp-area="" asp-page="/Borrowings/IndexAdmin">WYPOŻYCZENIA</a>
+                                        </li>
+                                    }
+                                    else if (User.IsInRole("Reader"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link lightText is_displayed_main_menu_option" asp-area="" asp-page="/RoomReservations/IndexReader">WYNAJEM SAL</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link lightText is_displayed_main_menu_option" asp-area="" asp-page="/Borrowings/IndexReader">WYPOŻYCZENIA</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link lightText is_displayed_main_menu_option" asp-area="Identity" asp-page="/Account/Login">WYNAJEM SAL</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link lightText is_displayed_main_menu_option" asp-area="Identity" asp-page="/Account/Login">WYPOŻYCZENIA</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+                <div class="show_main_menu">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="footer myFooter">
+        <div class="container">
+            &copy; 2023 - Books - Here And NOW - Wszelkie prawa zastrzeżone
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

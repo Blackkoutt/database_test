@@ -1,0 +1,91 @@
+body[b-pz56e01ovw] {
+}
+
+.container[b-pz56e01ovw] {
+    font-size: 1.2em;
+}
+
+.listofbooks[b-pz56e01ovw] {
+    float: right;
+    width: 70%;
+}
+
+*[b-pz56e01ovw] {
+    text-decoration: none;
+}
+h1[b-pz56e01ovw]{
+    clear:both;
+    margin-bottom: 40px;
+}
+
+.searchingsegment[b-pz56e01ovw] {
+    float:left;
+    width: 30%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper[b-pz56e01ovw] {
+    width: 80%;
+    background: #782222;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-left:auto;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    border: 2px solid black;
+}
+
+.wrapper input[b-pz56e01ovw] {
+   width: 70%;
+   padding: 15px 20px;
+   border: none;
+   border-radius: 5px
+}
+
+.searchbtn[b-pz56e01ovw] {
+    background: #ffec00;
+    width: 10%;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.searchbtn:hover[b-pz56e01ovw] {
+    background-color: #b0a503;
+}
+
+.searchbtn .fas[b-pz56e01ovw] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+h1[b-pz56e01ovw] {
+    text-align: center;
+}
+
+
+.addNewBookButton[b-pz56e01ovw] {
+    float: right; 
+}
+
+.filtrbutton[b-pz56e01ovw] {
+    float: left;
+    text-decoration: none;
+    margin-top: 30px;
+    clear: both;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    font-weight: bold;
+    background-image: linear-gradient(to right, #802424 0%, #401212 51%, #5a1919 100%);
+}
+    .filtrbutton:hover[b-pz56e01ovw] {
+        background-position: right center;
+    }
+

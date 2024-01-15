@@ -1,0 +1,87 @@
+﻿@page
+@model Biblioteka.Pages.RoomReservations.IndexEmployeesModel
+
+@{
+    ViewData["Title"] = "ReservationPanel";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+<div class="myContainerv2">
+	<h1>Wynajmowane sale</h1>
+	<form method="get">
+		<div class="searchingsegment">
+			<div class="wrapper">
+				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+				<input type="text" class="input" placeholder="Wyszukaj rezerwację" name="SearchTerm" value="@Model.SearchTerm">
+				<button type="submit" class="searchbtn">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+	</form>
+	<button class="button buttonDefault" style="float:right; margin-right:50px;">
+		<a class="nav-link lightText" asp-page="Create">Zarezerwuj salę</a>
+	</button>
+    <table class="tableToModify">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomReservation[0].begginingOfReservationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomReservation[0].endOfReservationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomReservation[0].room)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomReservation[0].reader.FullName)
+                </th>
+                @if (User.IsInRole("Employee"))
+                    {
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomReservation[0].Confirmation)
+                </th>
+                    }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RoomReservation)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.begginingOfReservationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.endOfReservationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.room.FullData)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.reader.FullName)
+                    </td>
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <td>
+                            @if (!item.Confirmation)
+                            {
+                                <button class="button buttonRed"><a class="lightText" asp-page="./Confirmation" asp-route-id="@item.reservationId">Potwierdź</a></button>
+
+                            }
+                            else
+                            {
+                                <div>Potwierdzone już</div>
+                            }
+                        </td>
+                    }
+                    <td>
+                        <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.reservationId">Anuluj</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

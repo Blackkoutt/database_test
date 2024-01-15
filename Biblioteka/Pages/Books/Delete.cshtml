@@ -1,0 +1,53 @@
+﻿@page
+@model Biblioteka.Views.Books.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h1>Usunięcię książki z księgozbioru: @Model.Book.title</h1>
+    <div class="myForm">
+        <h3>Napewno chcesz usunąć ten element?</h3>
+        <div>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Book.title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Book.title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Book.ISBN)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Book.ISBN)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Book.description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Book.description)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Book.availableCopys)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Book.availableCopys)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Book.releaseDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Book.releaseDate)
+                </dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Book.bookId" />
+                <input type="submit" value="Usuń" class="button buttonRed" />
+                <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+            </form>
+        </div>
+    </div>
+</div>
+

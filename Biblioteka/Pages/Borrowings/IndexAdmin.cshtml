@@ -1,0 +1,148 @@
+﻿@page
+@model Biblioteka.Pages.Borrowings.IndexAdminModel
+
+@{
+    ViewData["Title"] = "BorrowingPanel";
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+<div class="myContainerv2">
+    <h1>Wypożyczenia</h1>
+    <form method="get">
+        <div class="searchingsegment">
+            <div class="wrapper">
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+                <input type="text" class="input" placeholder="Wyszukaj wypożyczenie" name="SearchTerm" value="@Model.SearchTerm">
+                <button type="submit" class="searchbtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+    </form>
+            <div style="margin-top: 20px;">
+
+    <table class="tableToModify">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
+                </th>
+                <th>
+                    @Html.DisplayName("Imię i nazwisko czytelnika")
+                </th>
+                <th>
+                    @Html.DisplayName("Wypożyczona książka")
+                </th>
+               @if (User.IsInRole("Employee"))
+               {
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].Confirmation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].IsReturned)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Borrowing[0].IsPaid)
+                </th>
+               }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Borrowing)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.borrowDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.plannedReturnDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.returnDate)
+                    </td>
+                    <td>
+                        @foreach (var reader_borrowId in Model.Reader_Borrowings)
+                        {
+                            if (item.borrowId == reader_borrowId.borrowId)
+                            {
+                                @foreach (var readerModel in Model.Readers)
+                                {
+                                    if (reader_borrowId.readerId == readerModel.readerId)
+                                    {
+                                        <p>@readerModel.FullName</p>
+                                    }
+                                }
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.book.title)
+                    </td>
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <td>
+                            @if (item.book.availableCopys <= 0)
+                            {
+                                <div>Brak kopii</div>
+                            }
+                            else if (item.book.availableCopys > 0 && !item.Confirmation)
+                            {
+                                <button class="button buttonRed"><a class="lightText" asp-page="./Confirmation" asp-route-id="@item.borrowId">Potwierdź</a></button>
+
+                            }
+                            else
+                            {
+                                <div>Potwierdzone już</div>
+                            }
+
+                        </td>
+                        <td>
+                            @if (!item.IsReturned && item.Confirmation)
+                            {
+                                <button class="button buttonRed"><a class="lightText" asp-page="./ConfirmationReturn" asp-route-id="@item.borrowId">Potwierdź</a></button>
+
+                            }
+                            else if (!item.Confirmation && !item.IsReturned)
+                            {
+                                <div>Brak dostępu</div>
+                            }
+                            else
+                            {
+                                <div>Zwrócone już</div>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsReturned && item.Confirmation && !item.IsPaid)
+                            {
+                                <button class="button buttonRed"><a class="lightText" asp-page="./ConfirmationPayment" asp-route-id="@item.borrowId">Potwierdź</a></button>
+
+                            }
+                            else if (item.IsPaid)
+                            {
+                                <div>Zapłacone już</div>
+
+
+                            }
+                            else
+                            {
+                                <div>Brak dostępu</div>
+                            }
+                        </td>
+                    }
+                    <td>
+                        <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.borrowId">Usuń</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
